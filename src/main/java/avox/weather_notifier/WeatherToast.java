@@ -9,6 +9,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class WeatherToast implements Toast {
+    private static final Identifier TEXTURE = new Identifier("toast/advancement");
     private final String title;
     private final String message;
     private final Identifier icon;
@@ -28,7 +29,7 @@ public class WeatherToast implements Toast {
                 ? Visibility.HIDE
                 : Visibility.SHOW;
 
-        context.drawTexture(TEXTURE, 0, 0, 0, 0, getWidth(), getHeight());
+        context.drawGuiTexture(TEXTURE, 0, 0, getWidth(), getHeight());
         context.drawText(textRenderer, title, 30, 7, -256, false);
         context.drawText(textRenderer, message, 30, 18, -1, false);
 
