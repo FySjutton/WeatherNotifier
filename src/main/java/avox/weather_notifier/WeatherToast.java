@@ -1,8 +1,8 @@
 package avox.weather_notifier;
 
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.toast.Toast;
 import net.minecraft.client.toast.ToastManager;
 import net.minecraft.text.Text;
@@ -36,11 +36,11 @@ public class WeatherToast implements Toast {
 
     @Override
     public void draw(DrawContext context, TextRenderer textRenderer, long startTime) {
-        context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, TEXTURE, 0, 0, getWidth(), getHeight());
+        context.drawGuiTexture(RenderLayer::getGuiTextured, TEXTURE, 0, 0, getWidth(), getHeight());
         context.drawText(textRenderer, title, 30, 7, -256, false);
         context.drawText(textRenderer, message, 30, 18, -1, false);
 
-        context.drawTexture(RenderPipelines.GUI_TEXTURED, icon, 8, 8, 0, 0, 16, 16, 16, 16);
+        context.drawTexture(RenderLayer::getGuiTextured, icon, 8, 8, 0, 0, 16, 16, 16, 16);
     }
 
     @Override
