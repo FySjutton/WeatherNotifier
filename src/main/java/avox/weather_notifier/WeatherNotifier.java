@@ -39,7 +39,7 @@ public class WeatherNotifier implements ModInitializer {
 	private WeatherTypes detectWeather(ClientWorld world, ClientPlayerEntity player) {
 		if (world.isThundering()) return WeatherTypes.THUNDER;
 		if (world.isRaining()) {
-			if (world.getPrecipitation(player.getBlockPos()) == Biome.Precipitation.SNOW) {
+			if (world.getBiome(player.getBlockPos()).value().getPrecipitation(player.getBlockPos()) == Biome.Precipitation.SNOW) {
 				return WeatherTypes.SNOW;
 			}
 			return WeatherTypes.RAIN;
