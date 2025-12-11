@@ -1,0 +1,24 @@
+﻿{
+  "modmenu.descriptionTranslation.weather_notifier": "当天气变化时发送一条弹窗通知。",
+  "weather_notifier.discord": "Discord",
+
+  "weather_notifier.toast.title": "天气变化！",
+  "weather_notifier.toast.message.clear": "现在天空放晴",
+  "weather_notifier.toast.message.rain": "现在开始下雨",
+  "weather_notifier.toast.message.snow": "现在开始降雪", 
+  "weather_notifier.toast.message.thunder": "现在雷雨来临",
+
+  "weather_notifier.config.title": "天气通知器",
+  "weather_notifier.config.category.general": "通用设置",
+
+  "weather_notifier.config.option.clear_notification": "晴朗天气通知",
+  "weather_notifier.config.option.rain_notification": "下雨通知",
+  "weather_notifier.config.option.snow_notification": "下雪通知",
+  "weather_notifier.config.option.thunder_notification": "雷雨通知",
+
+  "weather_notifier.config.option.desc.clear_notification": "是否在天气转晴时接收通知。",
+  "weather_notifier.config.option.desc.rain_notification": "是否在开始下雨时接收通知。",
+  "weather_notifier.config.option.desc.snow_notification": "是否在开始下雪时接收通知。",
+  "weather_notifier.config.option.desc.thunder_notification": "是否在开始打雷时接收通知。"
+
+}
