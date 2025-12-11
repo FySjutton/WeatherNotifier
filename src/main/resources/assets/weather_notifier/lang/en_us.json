@@ -9,16 +9,21 @@
 
   "weather_notifier.config.title": "Weather Notifier",
   "weather_notifier.config.category.general": "General",
+  "weather_notifier.config.group.other": "Other",
 
   "weather_notifier.config.option.use_notification_sound": "Notification Sound",
   "weather_notifier.config.option.clear_notification": "Clear Notification",
   "weather_notifier.config.option.rain_notification": "Rain Notification",
   "weather_notifier.config.option.snow_notification": "Snow Notification",
   "weather_notifier.config.option.thunder_notification": "Thunder Notification",
+  "weather_notifier.config.option.cooldown": "Cooldown",
+  "weather_notifier.config.option.use_top_height": "Use Top Height",
 
   "weather_notifier.config.option.desc.use_notification_sound": "If you want a notification sound to be played when the weather changes.",
   "weather_notifier.config.option.desc.clear_notification": "If you want a notification when the weather becomes clear.",
   "weather_notifier.config.option.desc.rain_notification": "If you want a notification when it starts to rain.",
   "weather_notifier.config.option.desc.snow_notification": "If you want a notification when it starts to snow.",
-  "weather_notifier.config.option.desc.thunder_notification": "If you want a notification when it starts to thunder."
+  "weather_notifier.config.option.desc.thunder_notification": "If you want a notification when it starts to thunder.",
+  "weather_notifier.config.option.desc.cooldown": "Cooldown between toasts, this can help when passing between biome borders.",
+  "weather_notifier.config.option.desc.use_top_height": "If you want to use top height for recording. This can prevent certain spamming, but might also be less accurate."
 }

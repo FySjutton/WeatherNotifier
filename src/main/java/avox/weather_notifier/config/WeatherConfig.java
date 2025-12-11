@@ -1,10 +1,8 @@
 package avox.weather_notifier.config;
 
-import dev.isxander.yacl3.api.ConfigCategory;
-import dev.isxander.yacl3.api.Option;
-import dev.isxander.yacl3.api.OptionDescription;
-import dev.isxander.yacl3.api.YetAnotherConfigLib;
+import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
+import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
@@ -23,9 +21,12 @@ public class WeatherConfig {
     // General
     @SerialEntry public boolean clearNotification = true;
     @SerialEntry public boolean rainNotification = true;
-    @SerialEntry public boolean snowNotification = false;
+    @SerialEntry public boolean snowNotification = true;
     @SerialEntry public boolean thunderNotification = true;
     @SerialEntry public boolean useNotificationSound = true;
+
+    @SerialEntry public int cooldown = 5000;
+    @SerialEntry public boolean useTopHeight = true;
 
     public static Screen configScreen(Screen parent) {
         return YetAnotherConfigLib.create(CONFIG, ((defaults, config, builder) -> builder
@@ -60,7 +61,7 @@ public class WeatherConfig {
                                     .text(Text.translatable("weather_notifier.config.option.desc.snow_notification"))
                                     .image(Identifier.of("weather_notifier", "textures/gui/weather_preview/snow.png"), 320, 64)
                                     .build())
-                        .binding(false, () -> config.snowNotification, newVal -> config.snowNotification = newVal)
+                        .binding(true, () -> config.snowNotification, newVal -> config.snowNotification = newVal)
                         .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true))
                         .build())
                     .option(Option.<Boolean>createBuilder()
@@ -79,7 +80,24 @@ public class WeatherConfig {
                             .binding(true, () -> config.useNotificationSound, newVal -> config.useNotificationSound = newVal)
                             .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true))
                             .build())
-
+                    .group(OptionGroup.createBuilder()
+                            .name(Text.translatable("weather_notifier.config.group.other"))
+                            .option(Option.<Integer>createBuilder()
+                                    .name(Text.translatable("weather_notifier.config.option.cooldown"))
+                                    .description(OptionDescription.of(Text.translatable("weather_notifier.config.option.desc.cooldown")))
+                                    .binding(5000, () -> config.cooldown, newVal -> config.cooldown = newVal)
+                                    .controller(opt -> IntegerSliderControllerBuilder.create(opt)
+                                            .range(0, 20000)
+                                            .step(500)
+                                            .formatValue(val -> Text.of(val + "ms")))
+                                    .build())
+                            .option(Option.<Boolean>createBuilder()
+                                    .name(Text.translatable("weather_notifier.config.option.use_top_height"))
+                                    .description(OptionDescription.of(Text.translatable("weather_notifier.config.option.desc.use_top_height")))
+                                    .binding(true, () -> config.useTopHeight, newVal -> config.useTopHeight = newVal)
+                                    .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true))
+                                    .build())
+                            .build())
                     .build())
 
         )).generateScreen(parent);
