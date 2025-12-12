@@ -10,6 +10,7 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionTypes;
 import org.slf4j.Logger;
@@ -50,15 +51,13 @@ public class WeatherNotifier implements ModInitializer {
 
 	private WeatherTypes detectWeather(ClientWorld world, ClientPlayerEntity player) {
         if (lastToast + WeatherConfig.CONFIG.instance().cooldown > System.currentTimeMillis()) return lastWeather;
-        // TODO: Add a dimension check to avoid "Weather Clear" toasts when going to The End/Nether.
-        EnvironmentAttribute
-        if (world.getDimension().attributes().) return lastWeather;
+        if (world.getDimensionEntry().getKey().isEmpty() || !List.of(DimensionTypes.OVERWORLD, DimensionTypes.OVERWORLD_CAVES).contains(world.getDimensionEntry().getKey().get())) return lastWeather;
 
-		if (world.isThundering()) return WeatherTypes.THUNDER;
+        if (world.isThundering()) return WeatherTypes.THUNDER;
 		if (world.isRaining()) {
             BlockPos location = player.getBlockPos();
             if (WeatherConfig.CONFIG.instance().useTopHeight) {
-                location = location.withY(320);
+                location = world.getTopPosition(Heightmap.Type.WORLD_SURFACE, location);
             }
 			if (WeatherConfig.CONFIG.instance().snowNotification && world.getPrecipitation(location) == Biome.Precipitation.SNOW) {
                 return WeatherTypes.SNOW;

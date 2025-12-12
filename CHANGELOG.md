@@ -7,7 +7,9 @@ All changes from within these last few months are included in this changelog.
 - Fixed snow toast not working properly
 
 (new changes)
-- ...
+- Fixed snow toast again (now also enabled by default)
+- Added a new useTopHeight configuration option, this might make weather checks more accurate in some cases, less accurate in others.
+- Fixed toasts when traveling between dimensions
 
 ## Languages
 (old, unreleased changes)

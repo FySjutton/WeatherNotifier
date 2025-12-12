@@ -25,5 +25,5 @@
   "weather_notifier.config.option.desc.snow_notification": "If you want a notification when it starts to snow.",
   "weather_notifier.config.option.desc.thunder_notification": "If you want a notification when it starts to thunder.",
   "weather_notifier.config.option.desc.cooldown": "Cooldown between toasts, this can help when passing between biome borders.",
-  "weather_notifier.config.option.desc.use_top_height": "If you want to use top height for recording. This can prevent certain spamming, but might also be less accurate."
+  "weather_notifier.config.option.desc.use_top_height": "If you want to use top height for weather check. This can prevent certain spamming, but might also be less accurate and more heavy."
 }
