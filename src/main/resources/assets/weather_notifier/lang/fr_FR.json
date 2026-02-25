@@ -1,0 +1,24 @@
+{
+  "weather_notifier.discord": "Discord",
+
+  "weather_notifier.toast.title": "Changement de météo!",
+  "weather_notifier.toast.message.clear": "Le temps est clair.",
+  "weather_notifier.toast.message.rain": "Il pleut maintenant.",
+  "weather_notifier.toast.message.snow": "Il neige maintenant.",
+  "weather_notifier.toast.message.thunder": "Il y a de l'orage.",
+
+  "weather_notifier.config.title": "Alerte météo",
+  "weather_notifier.config.category.general": "Général",
+
+  "weather_notifier.config.option.use_notification_sound": "Son de notification",
+  "weather_notifier.config.option.clear_notification": "Notification temps claire",
+  "weather_notifier.config.option.rain_notification": "Notification de pluie",
+  "weather_notifier.config.option.snow_notification": "Notification de neige",
+  "weather_notifier.config.option.thunder_notification": "Notification d'orage",
+
+  "weather_notifier.config.option.desc.use_notification_sound": "Si vous souhaitez qu'un son de notification soit émis lorsque le temps change.",
+  "weather_notifier.config.option.desc.clear_notification": "Si vous souhaitez recevoir une notification lorsque le temps s'éclaircit.",
+  "weather_notifier.config.option.desc.rain_notification": "Si vous souhaitez recevoir une notification lorsqu'il commence à pleuvoir.",
+  "weather_notifier.config.option.desc.snow_notification": "Si vous souhaitez recevoir une notification lorsqu'il commence à neiger.",
+  "weather_notifier.config.option.desc.thunder_notification": "Si vous souhaitez recevoir une notification lorsque l'orage commence."
+}
