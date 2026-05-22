@@ -9,16 +9,21 @@
 
   "weather_notifier.config.title": "Notificador del Tiempo",
   "weather_notifier.config.category.general": "General",
+  "weather_notifier.config.group.other": "Otros",
 
   "weather_notifier.config.option.use_notification_sound": "Sonido de notificación",
-  "weather_notifier.config.option.clear_notification": "Notificación por despejado",
-  "weather_notifier.config.option.rain_notification": "Notificación por lluvia",
-  "weather_notifier.config.option.snow_notification": "Notificación por nieve",
-  "weather_notifier.config.option.thunder_notification": "Notificación por tormenta",
+  "weather_notifier.config.option.clear_notification": "Notificación de tiempo despejado",
+  "weather_notifier.config.option.rain_notification": "Notificación de lluvia",
+  "weather_notifier.config.option.snow_notification": "Notificación de nieve",
+  "weather_notifier.config.option.thunder_notification": "Notificación de tormenta",
+  "weather_notifier.config.option.cooldown": "Tiempo de espera",
+  "weather_notifier.config.option.use_top_height": "Usar altura superior",
 
-  "weather_notifier.config.option.desc.use_notification_sound": "Activa un sonido de notificación cuando el tiempo cambie.",
-  "weather_notifier.config.option.desc.clear_notification": "Activa una notificación cuando el tiempo se despeje.",
-  "weather_notifier.config.option.desc.rain_notification": "Activa una notificación cuando empiece a llover.",
-  "weather_notifier.config.option.desc.snow_notification": "Activa una notificación cuando empiece a nevar.",
-  "weather_notifier.config.option.desc.thunder_notification": "Activa una notificación cuando empiece una tormenta."
+  "weather_notifier.config.option.desc.use_notification_sound": "Reproduce un sonido cuando el tiempo cambie.",
+  "weather_notifier.config.option.desc.clear_notification": "Muestra una notificación cuando el tiempo se despeje.",
+  "weather_notifier.config.option.desc.rain_notification": "Muestra una notificación cuando empiece a llover.",
+  "weather_notifier.config.option.desc.snow_notification": "Muestra una notificación cuando empiece a nevar.",
+  "weather_notifier.config.option.desc.thunder_notification": "Muestra una notificación cuando comience una tormenta.",
+  "weather_notifier.config.option.desc.cooldown": "Tiempo de espera entre notificaciones. Puede ayudar al cruzar límites entre biomas.",
+  "weather_notifier.config.option.desc.use_top_height": "Usa la altura superior para comprobar el tiempo. Puede reducir ciertas notificaciones repetidas, pero podría ser menos preciso y consumir más recursos."
 }
