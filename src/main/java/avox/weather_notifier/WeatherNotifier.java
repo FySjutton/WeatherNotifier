@@ -4,15 +4,15 @@ import avox.weather_notifier.config.WeatherConfig;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.dimension.DimensionTypes;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
+import net.minecraft.world.level.levelgen.Heightmap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,10 +32,10 @@ public class WeatherNotifier implements ModInitializer {
 	public void onInitialize() {
 		WeatherConfig.CONFIG.load();
 
-		Registry.register(Registries.SOUND_EVENT, NOTIFICATION_SOUND_ID, NOTIFICATION_SOUND_EVENT);
+		Registry.register(BuiltInRegistries.SOUND_EVENT, NOTIFICATION_SOUND_ID, NOTIFICATION_SOUND_EVENT);
 
 		ClientTickEvents.START_CLIENT_TICK.register(client -> {
-			ClientWorld world = client.world;
+			ClientLevel world = client.level;
 			if (world != null && client.player != null) {
 				WeatherTypes currentWeather = detectWeather(world, client.player);
 
@@ -49,17 +49,17 @@ public class WeatherNotifier implements ModInitializer {
 		});
 	}
 
-	private WeatherTypes detectWeather(ClientWorld world, ClientPlayerEntity player) {
+	private WeatherTypes detectWeather(ClientLevel world, LocalPlayer player) {
         if (lastToast + WeatherConfig.CONFIG.instance().cooldown > System.currentTimeMillis()) return lastWeather;
-        if (world.getDimensionEntry().getKey().isEmpty() || !List.of(DimensionTypes.OVERWORLD, DimensionTypes.OVERWORLD_CAVES).contains(world.getDimensionEntry().getKey().get())) return lastWeather;
+        if (world.dimensionTypeRegistration().unwrapKey().isEmpty() || !List.of(BuiltinDimensionTypes.OVERWORLD, BuiltinDimensionTypes.OVERWORLD_CAVES).contains(world.dimensionTypeRegistration().unwrapKey().get())) return lastWeather;
 
         if (world.isThundering()) return WeatherTypes.THUNDER;
 		if (world.isRaining()) {
-            BlockPos location = player.getBlockPos();
+            BlockPos location = player.blockPosition();
             if (WeatherConfig.CONFIG.instance().useTopHeight) {
-                location = world.getTopPosition(Heightmap.Type.WORLD_SURFACE, location);
+                location = world.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, location);
             }
-			if (WeatherConfig.CONFIG.instance().snowNotification && world.getPrecipitation(location) == Biome.Precipitation.SNOW) {
+			if (WeatherConfig.CONFIG.instance().snowNotification && world.precipitationAt(location) == Biome.Precipitation.SNOW) {
                 return WeatherTypes.SNOW;
 			}
 			return WeatherTypes.RAIN;
@@ -67,7 +67,7 @@ public class WeatherNotifier implements ModInitializer {
 		return WeatherTypes.CLEAR;
 	}
 
-	private void addToast(MinecraftClient client, WeatherTypes weather) {
+	private void addToast(Minecraft client, WeatherTypes weather) {
 		WeatherConfig config = WeatherConfig.CONFIG.instance();
 		if (
 			(weather.equals(WeatherTypes.CLEAR) && config.clearNotification) ||
@@ -77,7 +77,7 @@ public class WeatherNotifier implements ModInitializer {
 		) {
             lastToast = System.currentTimeMillis();
 			WeatherToast toast = new WeatherToast(client, weather);
-			client.getToastManager().add(toast);
+			client.getToastManager().addToast(toast);
 		}
 	}
 }
