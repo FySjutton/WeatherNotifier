@@ -24,8 +24,12 @@ import static avox.weather_notifier.WeatherToast.NOTIFICATION_SOUND_ID;
 public class WeatherNotifier implements ModInitializer {
 	public static final String MOD_ID = "weather_notifier";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    private static final long DAY_LENGTH = 24000L;
+    private static final long NIGHT_START = 13000L;
+    private static final long DAY_START = 23000L;
 
 	private WeatherTypes lastWeather;
+    private WeatherTypes lastTimeOfDay;
     private long lastToast = 0;
 
 	@Override
@@ -45,13 +49,20 @@ public class WeatherNotifier implements ModInitializer {
 					}
 					lastWeather = currentWeather;
 				}
+
+                WeatherTypes currentTimeOfDay = detectTimeOfDay(world);
+                if (lastTimeOfDay == null || !lastTimeOfDay.equals(currentTimeOfDay)) {
+                    if (lastTimeOfDay != null) {
+                        addToast(client, currentTimeOfDay);
+                    }
+                    lastTimeOfDay = currentTimeOfDay;
+                }
 			}
 		});
 	}
 
 	private WeatherTypes detectWeather(ClientLevel world, LocalPlayer player) {
-        if (lastToast + WeatherConfig.CONFIG.instance().cooldown > System.currentTimeMillis()) return lastWeather;
-        if (world.dimensionTypeRegistration().unwrapKey().isEmpty() || !List.of(BuiltinDimensionTypes.OVERWORLD, BuiltinDimensionTypes.OVERWORLD_CAVES).contains(world.dimensionTypeRegistration().unwrapKey().get())) return lastWeather;
+        if (!canNotify(world)) return lastWeather;
 
         if (world.isThundering()) return WeatherTypes.THUNDER;
 		if (world.isRaining()) {
@@ -67,13 +78,28 @@ public class WeatherNotifier implements ModInitializer {
 		return WeatherTypes.CLEAR;
 	}
 
+    private WeatherTypes detectTimeOfDay(ClientLevel world) {
+        if (!canNotify(world)) return lastTimeOfDay;
+
+        long timeOfDay = Math.floorMod(world.getDefaultClockTime(), DAY_LENGTH);
+        return timeOfDay >= NIGHT_START && timeOfDay < DAY_START ? WeatherTypes.NIGHT : WeatherTypes.DAY;
+    }
+
+    private boolean canNotify(ClientLevel world) {
+        if (lastToast + WeatherConfig.CONFIG.instance().cooldown > System.currentTimeMillis()) return false;
+        return world.dimensionTypeRegistration().unwrapKey().isPresent()
+            && List.of(BuiltinDimensionTypes.OVERWORLD, BuiltinDimensionTypes.OVERWORLD_CAVES).contains(world.dimensionTypeRegistration().unwrapKey().get());
+    }
+
 	private void addToast(Minecraft client, WeatherTypes weather) {
 		WeatherConfig config = WeatherConfig.CONFIG.instance();
 		if (
 			(weather.equals(WeatherTypes.CLEAR) && config.clearNotification) ||
 			(weather.equals(WeatherTypes.RAIN) && config.rainNotification) ||
             (weather.equals(WeatherTypes.THUNDER) && config.thunderNotification) ||
-            (weather.equals(WeatherTypes.SNOW) && config.snowNotification)
+            (weather.equals(WeatherTypes.SNOW) && config.snowNotification) ||
+            (weather.equals(WeatherTypes.DAY) && config.dayNotification) ||
+            (weather.equals(WeatherTypes.NIGHT) && config.nightNotification)
 		) {
             lastToast = System.currentTimeMillis();
 			WeatherToast toast = new WeatherToast(client, weather);

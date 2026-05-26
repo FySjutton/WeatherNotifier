@@ -23,6 +23,8 @@ public class WeatherConfig {
     @SerialEntry public boolean rainNotification = true;
     @SerialEntry public boolean snowNotification = true;
     @SerialEntry public boolean thunderNotification = true;
+    @SerialEntry public boolean dayNotification = true;
+    @SerialEntry public boolean nightNotification = true;
     @SerialEntry public boolean useNotificationSound = true;
 
     @SerialEntry public int cooldown = 5000;
@@ -74,6 +76,18 @@ public class WeatherConfig {
                         .binding(true, () -> config.thunderNotification, newVal -> config.thunderNotification = newVal)
                         .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true))
                         .build())
+                    .option(Option.<Boolean>createBuilder()
+                            .name(Component.translatable("weather_notifier.config.option.day_notification"))
+                            .description(OptionDescription.of(Component.translatable("weather_notifier.config.option.desc.day_notification")))
+                            .binding(true, () -> config.dayNotification, newVal -> config.dayNotification = newVal)
+                            .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true))
+                            .build())
+                    .option(Option.<Boolean>createBuilder()
+                            .name(Component.translatable("weather_notifier.config.option.night_notification"))
+                            .description(OptionDescription.of(Component.translatable("weather_notifier.config.option.desc.night_notification")))
+                            .binding(true, () -> config.nightNotification, newVal -> config.nightNotification = newVal)
+                            .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true))
+                            .build())
                     .option(Option.<Boolean>createBuilder()
                             .name(Component.translatable("weather_notifier.config.option.use_notification_sound"))
                             .description(OptionDescription.of(Component.translatable("weather_notifier.config.option.desc.use_notification_sound")))
