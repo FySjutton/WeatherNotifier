@@ -103,7 +103,7 @@ public class WeatherNotifier implements ModInitializer {
 		) {
             lastToast = System.currentTimeMillis();
 			WeatherToast toast = new WeatherToast(client, weather);
-			client.getToastManager().addToast(toast);
+			client.gui.toastManager().addToast(toast);
 		}
 	}
 }
