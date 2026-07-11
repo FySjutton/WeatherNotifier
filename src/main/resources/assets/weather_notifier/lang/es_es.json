@@ -2,10 +2,13 @@
   "weather_notifier.discord": "Discord",
 
   "weather_notifier.toast.title": "¡El tiempo ha cambiado!",
+  "weather_notifier.toast.title.time": "¡La hora ha cambiado!",
   "weather_notifier.toast.message.clear": "Ahora está despejado.",
   "weather_notifier.toast.message.rain": "Ahora está lloviendo.",
   "weather_notifier.toast.message.snow": "Ahora está nevando.",
   "weather_notifier.toast.message.thunder": "Ahora hay tormenta.",
+  "weather_notifier.toast.message.day": "Ahora es de día.",
+  "weather_notifier.toast.message.night": "Ahora es de noche.",
 
   "weather_notifier.config.title": "Notificador del Tiempo",
   "weather_notifier.config.category.general": "General",
@@ -16,6 +19,8 @@
   "weather_notifier.config.option.rain_notification": "Notificación de lluvia",
   "weather_notifier.config.option.snow_notification": "Notificación de nieve",
   "weather_notifier.config.option.thunder_notification": "Notificación de tormenta",
+  "weather_notifier.config.option.day_notification": "Notificación de día",
+  "weather_notifier.config.option.night_notification": "Notificación de noche",
   "weather_notifier.config.option.cooldown": "Tiempo de espera",
   "weather_notifier.config.option.use_top_height": "Usar altura superior",
 
@@ -24,6 +29,8 @@
   "weather_notifier.config.option.desc.rain_notification": "Muestra una notificación cuando empiece a llover.",
   "weather_notifier.config.option.desc.snow_notification": "Muestra una notificación cuando empiece a nevar.",
   "weather_notifier.config.option.desc.thunder_notification": "Muestra una notificación cuando comience una tormenta.",
+  "weather_notifier.config.option.desc.day_notification": "Muestra una notificación cuando empiece el día.",
+  "weather_notifier.config.option.desc.night_notification": "Muestra una notificación cuando empiece la noche.",
   "weather_notifier.config.option.desc.cooldown": "Tiempo de espera entre notificaciones. Puede ayudar al cruzar límites entre biomas.",
   "weather_notifier.config.option.desc.use_top_height": "Usa la altura superior para comprobar el tiempo. Puede reducir ciertas notificaciones repetidas, pero podría ser menos preciso y consumir más recursos."
 }

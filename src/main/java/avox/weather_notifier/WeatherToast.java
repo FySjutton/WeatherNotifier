@@ -23,8 +23,9 @@ public class WeatherToast implements Toast {
     public static SoundEvent NOTIFICATION_SOUND_EVENT = SoundEvent.createVariableRangeEvent(NOTIFICATION_SOUND_ID);
 
     public WeatherToast(Minecraft client, WeatherTypes weather) {
-        this.icon = Identifier.fromNamespaceAndPath("weather_notifier", "textures/gui/weather_icons/" + weather.name().toLowerCase() + ".png");
-        this.title = (weather.equals(WeatherTypes.CLEAR) ? "§e" : "§b") + Component.translatable("weather_notifier.toast.title").getString();
+        this.icon = Identifier.fromNamespaceAndPath("weather_notifier", "textures/gui/weather_icons/" + weather.getIconName() + ".png");
+        this.title = (weather.equals(WeatherTypes.CLEAR) || weather.equals(WeatherTypes.DAY) ? "§e" : "§b")
+            + Component.translatable("weather_notifier.toast.title" + (weather.isTimeOfDay() ? ".time" : "")).getString();
         this.message = String.format(Component.translatable("weather_notifier.toast.message." + weather.name().toLowerCase()).getString());
         if (client.player != null && WeatherConfig.CONFIG.instance().useNotificationSound) {
             client.player.makeSound(NOTIFICATION_SOUND_EVENT);

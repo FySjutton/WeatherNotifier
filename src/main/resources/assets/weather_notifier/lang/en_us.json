@@ -2,10 +2,13 @@
   "weather_notifier.discord": "Discord",
 
   "weather_notifier.toast.title": "Weather Changed!",
+  "weather_notifier.toast.title.time": "Time Changed!",
   "weather_notifier.toast.message.clear": "It is now clear.",
   "weather_notifier.toast.message.rain": "It is now raining.",
   "weather_notifier.toast.message.snow": "It is now snowing.",
   "weather_notifier.toast.message.thunder": "It is now thundering.",
+  "weather_notifier.toast.message.day": "It is now daytime.",
+  "weather_notifier.toast.message.night": "It is now nighttime.",
 
   "weather_notifier.config.title": "Weather Notifier",
   "weather_notifier.config.category.general": "General",
@@ -16,6 +19,8 @@
   "weather_notifier.config.option.rain_notification": "Rain Notification",
   "weather_notifier.config.option.snow_notification": "Snow Notification",
   "weather_notifier.config.option.thunder_notification": "Thunder Notification",
+  "weather_notifier.config.option.day_notification": "Daytime Notification",
+  "weather_notifier.config.option.night_notification": "Nighttime Notification",
   "weather_notifier.config.option.cooldown": "Cooldown",
   "weather_notifier.config.option.use_top_height": "Use Top Height",
 
@@ -24,6 +29,8 @@
   "weather_notifier.config.option.desc.rain_notification": "If you want a notification when it starts to rain.",
   "weather_notifier.config.option.desc.snow_notification": "If you want a notification when it starts to snow.",
   "weather_notifier.config.option.desc.thunder_notification": "If you want a notification when it starts to thunder.",
+  "weather_notifier.config.option.desc.day_notification": "If you want a notification when daytime starts.",
+  "weather_notifier.config.option.desc.night_notification": "If you want a notification when nighttime starts.",
   "weather_notifier.config.option.desc.cooldown": "Cooldown between toasts, this can help when passing between biome borders.",
   "weather_notifier.config.option.desc.use_top_height": "If you want to use top height for weather check. This can prevent certain spamming, but might also be less accurate and more heavy."
 }
